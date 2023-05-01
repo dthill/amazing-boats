@@ -1,0 +1,23 @@
+version: "3"
+services:
+  db:
+    image: postgres:15-bullseye
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+  proxy:
+    image: caddy:2.6
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddydata:/data
+      - caddyconfig:/config
+volumes:
+  dbdata:
+  caddydata:
+  caddyconfig:

@@ -1,0 +1,20 @@
+<div class="bg-primary text-white p-4">
+  <div class="main d-flex justify-content-between">
+    <a
+      [routerLink]="[routeConstants.home]"
+      class="text-white text-decoration-none"
+    >
+      <h1 class="title">Amazing Boats</h1>
+    </a>
+    <button
+      *ngIf="loggedIn$ | async; else loggedIn"
+      (click)="logout()"
+      class="btn text-white"
+    >
+      Logout
+    </button>
+    <ng-template #loggedIn>
+      <button (click)="login()" class="btn text-white">Login</button>
+    </ng-template>
+  </div>
+</div>

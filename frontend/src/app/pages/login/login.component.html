@@ -1,0 +1,40 @@
+<main class="main p-3">
+  <form (submit)="login()" [formGroup]="loginForm" class="form-group card p-3">
+    <h2 class="text-center">Login</h2>
+    <span class="mb-3">
+      <label for="email">Email *</label>
+      <input
+        class="form-control"
+        type="email"
+        formControlName="email"
+        id="email"
+      />
+      <small *ngIf="email.errors && email.touched" class="text-danger"
+        >Please check this field</small
+      >
+    </span>
+    <span class="mb-3">
+      <label for="password">Password *</label>
+      <input
+        class="form-control"
+        type="password"
+        formControlName="password"
+        id="password"
+      />
+      <small *ngIf="password.errors && password.touched" class="text-danger"
+        >Please check this field</small
+      >
+    </span>
+    <button
+      [disabled]="loginForm.invalid || (loading$ | async)"
+      class="btn btn-primary mb-3"
+      type="submit"
+    >
+      Login
+    </button>
+    <small *ngIf="error$ | async" class="text-danger"
+      >Invalid email or password.</small
+    >
+    <a [routerLink]="['', routeConstants.register]" class="">Register</a>
+  </form>
+</main>

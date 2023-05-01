@@ -1,0 +1,156 @@
+<div class="p-4">
+  <main class="main">
+    <h2 class="text-center">Boat List</h2>
+
+    <table
+      *ngIf="(boats$ | async)?.length; else noBoats"
+      class="table table-striped"
+    >
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let boat of boats$ | async">
+          <td>{{ boat.id }}</td>
+          <td>{{ boat.name }}</td>
+          <td>{{ boat.description }}</td>
+          <td>
+            <span class="d-flex justify-content-end gap-1 flex-wrap">
+              <button
+                (click)="openEditBoatDialoge(boat.id)"
+                type="button"
+                class="btn btn-secondary py-0"
+              >
+                Edit
+              </button>
+              <button
+                (click)="deleteBoat(boat.id)"
+                type="button"
+                class="btn btn-secondary py-0"
+              >
+                Delete
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noBoats>
+      <p class="">No boats added yet</p>
+    </ng-template>
+
+    <h2 class="text-center mt-5">Add Boat</h2>
+    <form
+      [formGroup]="addBoatForm"
+      (submit)="addBoat()"
+      class="form-group d-flex justify-content-center align-items-end gap-4"
+    >
+      <span class="w-100">
+        <div class="d-flex justify-content-between">
+          <label for="name" class="form-label">Name *</label>
+          <small *ngIf="addName.errors && addName.touched" class="text-danger"
+            >Field required</small
+          >
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+        />
+      </span>
+      <span class="w-100">
+        <div class="d-flex justify-content-between">
+          <label for="description" class="form-label">Description *</label>
+          <small
+            *ngIf="addDescription.errors && addDescription.touched"
+            class="text-danger"
+            >Field required</small
+          >
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="description"
+        />
+      </span>
+      <button
+        [disabled]="(loading$ | async) || addBoatForm.invalid"
+        type="submit"
+        class="btn btn-primary add-btn"
+      >
+        + Add Boat
+      </button>
+    </form>
+    <small
+      *ngIf="error$ | async"
+      class="d-block w-100 text-danger text-center my-1"
+    >
+      An error occured. Try again later.
+    </small>
+  </main>
+</div>
+
+<dialog #dialog (click)="handleClickDialog($event)" class="dialog">
+  <form
+    [formGroup]="editBoatForm"
+    (submit)="editBoat()"
+    class="form-group w-100 p-3"
+  >
+    <h2 class="text-center">Edit Boat</h2>
+    <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input type="text" class="form-control" id="id" formControlName="id" />
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+      <small *ngIf="editName.errors && editName.touched" class="text-danger"
+        >Field required</small
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        formControlName="description"
+      />
+      <small
+        *ngIf="editDescription.errors && editDescription.touched"
+        class="text-danger"
+        >Field required</small
+      >
+    </div>
+    <div class="text-center">
+      <button
+        [disabled]="(loading$ | async) || editBoatForm.invalid"
+        type="submit"
+        class="btn btn-primary me-2"
+      >
+        Edit Boat
+      </button>
+      <button (click)="closeDialog()" type="button" class="btn btn-secondary">
+        Cancel
+      </button>
+      <small
+        *ngIf="error$ | async"
+        class="text-danger d-block w-100 text-center mt-2"
+        >An error occured. Try again later.</small
+      >
+    </div>
+  </form>
+</dialog>

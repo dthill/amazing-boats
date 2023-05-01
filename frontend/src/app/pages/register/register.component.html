@@ -1,0 +1,45 @@
+<main class="main p-3">
+  <form
+    (submit)="register()"
+    [formGroup]="registerForm"
+    class="form-group card p-3"
+  >
+    <h1 class="text-center">Register</h1>
+    <span class="mb-3">
+      <label for="email">Email *</label>
+      <input
+        class="form-control"
+        type="email"
+        formControlName="email"
+        id="email"
+      />
+      <small *ngIf="email.errors && email.touched" class="text-danger"
+        >Please check this field</small
+      >
+    </span>
+    <span class="mb-3">
+      <label for="password">Password *</label>
+      <input
+        class="form-control"
+        type="password"
+        formControlName="password"
+        id="password"
+      />
+      <small *ngIf="password.errors && password.touched" class="text-danger"
+        >Please check this field</small
+      >
+    </span>
+
+    <button
+      [disabled]="registerForm.invalid || (loading$ | async)"
+      class="btn btn-primary mb-3"
+      type="submit"
+    >
+      Register
+    </button>
+    <small *ngIf="error$ | async" class="text-danger"
+      >An error occured while registring. Please check your provided email and
+      password.</small
+    >
+  </form>
+</main>
