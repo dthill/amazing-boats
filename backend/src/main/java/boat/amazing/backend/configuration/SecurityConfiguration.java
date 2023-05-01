@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/error",
                         "/user/logout",
-                        "/user/register",
+                        "/user/register"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
