@@ -26,7 +26,7 @@ export class UserState {
             error: false,
             token: btoa(`${email}:${password}`),
         });
-        return this.apiService.login(email, password).pipe(
+        return this.apiService.login().pipe(
             tap((response) => {
                 if (response === null) {
                     ctx.setState({ loading: false, error: true, token: null });

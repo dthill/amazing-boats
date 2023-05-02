@@ -35,6 +35,10 @@ public class BoatService {
         boatRepository.deleteBoatById(id);
     }
 
+    public Boat getBoat(Long id){
+        return boatRepository.findBoatById(id);
+    }
+
 
     public List<Boat> findAll() {
         return boatRepository.findAll();

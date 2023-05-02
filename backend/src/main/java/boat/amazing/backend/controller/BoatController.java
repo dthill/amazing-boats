@@ -39,6 +39,12 @@ public class BoatController {
         return boatService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Boat get(@Validated @PathVariable long id) {
+        logger.info("controller: /boats/"+id);
+        return boatService.getBoat(id);
+    }
+
     @PostMapping()
     public Boat save(@Validated @RequestBody AddBoatDto boat) {
         logger.info("controller: post boat/ " + boat);
@@ -55,7 +61,7 @@ public class BoatController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public void delete(@Validated @PathVariable long id) {
         logger.info("controller: delete boat/ " + id);
         boatService.deleteBoat(id);
     }

@@ -23,8 +23,8 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/error",
                         "/user/logout",
-                        "/user/register"
-                ).permitAll()
+                        "/user/register")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .logout().disable()
