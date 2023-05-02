@@ -10,17 +10,17 @@ import { InterceptorsModule } from './interceptors/interceptors.module';
 import { NgxsStateModule } from './state/state.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    InterceptorsModule,
-    NgxsStateModule,
-    HeaderComponent,
-    FooterComponent,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        InterceptorsModule,
+        NgxsStateModule,
+        HeaderComponent,
+        FooterComponent,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

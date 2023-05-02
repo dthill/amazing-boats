@@ -5,11 +5,11 @@ import { routeConstants } from '../constants/route.constants';
 import { UserSelectors } from '../state/user/user.selectors';
 
 export const loggedInGuard = () => {
-  const store = inject(Store);
-  const loggedIn = store.selectSnapshot(UserSelectors.loggedIn);
-  if (loggedIn) {
-    return true;
-  }
-  const router = inject(Router);
-  return router.navigate([routeConstants.login]);
+    const store = inject(Store);
+    const loggedIn = store.selectSnapshot(UserSelectors.loggedIn);
+    if (loggedIn) {
+        return true;
+    }
+    const router = inject(Router);
+    return router.navigate([routeConstants.login]);
 };

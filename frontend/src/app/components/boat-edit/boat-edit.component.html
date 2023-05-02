@@ -1,0 +1,56 @@
+<dialog #dialog (click)="handleClickDialog($event)" class="dialog">
+  <form
+    [formGroup]="editBoatForm"
+    (submit)="editBoat()"
+    class="form-group w-100 p-3"
+  >
+    <h2 class="text-center">Edit Boat</h2>
+    <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input type="text" class="form-control" id="id" formControlName="id" />
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+      <small *ngIf="editName.errors && editName.touched" class="text-danger"
+        >Field required</small
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description *</label>
+      <textarea
+        class="form-control"
+        id="description"
+        formControlName="description"
+      ></textarea>
+      <small
+        *ngIf="editDescription.errors && editDescription.touched"
+        class="text-danger"
+        >Field required</small
+      >
+    </div>
+    <div class="text-center">
+      <button
+        [disabled]="(loading$ | async) || editBoatForm.invalid"
+        type="submit"
+        class="btn btn-primary me-2"
+      >
+        Edit Boat
+      </button>
+      <button (click)="closeDialog()" type="button" class="btn btn-secondary">
+        Cancel
+      </button>
+      <small
+        *ngIf="error$ | async"
+        class="text-danger d-block w-100 text-center mt-2"
+        >An error occured. Try again later.</small
+      >
+    </div>
+  </form>
+</dialog>

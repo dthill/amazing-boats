@@ -4,82 +4,89 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class ApiService {
-  constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {}
 
-  register(email: string, password: string): Observable<UserDto | null> {
-    return this.httpClient.post(
-      `${environment.api}/user/register`,
-      {
-        email,
-        password,
-      },
-      {
-        responseType: 'json',
-        withCredentials: false,
-      }
-    ) as Observable<UserDto | null>;
-  }
+    register(email: string, password: string): Observable<UserDto | null> {
+        return this.httpClient.post(
+            `${environment.api}/user/register`,
+            {
+                email,
+                password,
+            },
+            {
+                responseType: 'json',
+                withCredentials: false,
+            }
+        ) as Observable<UserDto | null>;
+    }
 
-  login(email: string, password: string): Observable<UserDto | null> {
-    return this.httpClient.get(`${environment.api}/user/login`, {
-      responseType: 'json',
-      withCredentials: true,
-    }) as Observable<UserDto | null>;
-  }
+    login(): Observable<UserDto | null> {
+        return this.httpClient.get(`${environment.api}/user/login`, {
+            responseType: 'json',
+            withCredentials: true,
+        }) as Observable<UserDto | null>;
+    }
 
-  logout() {
-    return this.httpClient.get(`${environment.api}/user/logout`, {
-      responseType: 'json',
-      withCredentials: false,
-    }) as Observable<never>;
-  }
+    logout() {
+        return this.httpClient.get(`${environment.api}/user/logout`, {
+            responseType: 'json',
+            withCredentials: false,
+        }) as Observable<never>;
+    }
 
-  getBoats() {
-    return this.httpClient.get(`${environment.api}/boat/all`, {
-      responseType: 'json',
-      withCredentials: true,
-    }) as Observable<BoatDto[]>;
-  }
+    getBoats() {
+        return this.httpClient.get(`${environment.api}/boat/all`, {
+            responseType: 'json',
+            withCredentials: true,
+        }) as Observable<BoatDto[]>;
+    }
 
-  addBoat(name: string, description: string) {
-    return this.httpClient.post(
-      `${environment.api}/boat`,
-      { name, description },
-      {
-        responseType: 'json',
-        withCredentials: true,
-      }
-    ) as Observable<BoatDto>;
-  }
+    addBoat(name: string, description: string) {
+        return this.httpClient.post(
+            `${environment.api}/boat`,
+            { name, description },
+            {
+                responseType: 'json',
+                withCredentials: true,
+            }
+        ) as Observable<BoatDto>;
+    }
 
-  editBoat(id: number, name: string, description: string) {
-    return this.httpClient.put(
-      `${environment.api}/boat`,
-      { name, description, id },
-      {
-        responseType: 'json',
-        withCredentials: true,
-      }
-    ) as Observable<BoatDto>;
-  }
+    editBoat(id: number, name: string, description: string) {
+        return this.httpClient.put(
+            `${environment.api}/boat`,
+            { name, description, id },
+            {
+                responseType: 'json',
+                withCredentials: true,
+            }
+        ) as Observable<BoatDto>;
+    }
 
-  deleteBoat(id: number) {
-    return this.httpClient.delete(`${environment.api}/boat/${id}`, {
-      responseType: 'json',
-      withCredentials: true,
-    }) as Observable<never>;
-  }
+    deleteBoat(id: number) {
+        return this.httpClient.delete(`${environment.api}/boat/${id}`, {
+            responseType: 'json',
+            withCredentials: true,
+        }) as Observable<never>;
+    }
+
+    getBoatDetails(id: string) {
+        return this.httpClient.get(`${environment.api}/boat/${id}`, {
+            responseType: 'json',
+            withCredentials: true,
+        }) as Observable<BoatDto>;
+    }
 }
 
 export interface UserDto {
-  email: string;
+    email: string;
 }
 
 export interface BoatDto {
-  id: number;
-  name: string;
-  description: string;
+    id: number;
+    name: string;
+    description: string;
 }

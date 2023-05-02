@@ -1,0 +1,13 @@
+<main *ngIf="boatDetails$ | async as boat" class="main">
+  <div class="card p-3 m-3">
+    <h2 class="text-center">{{ boat.name }}</h2>
+    <h3>Description</h3>
+    <p class="">
+      {{ boat.description }}
+    </p>
+    <div class="d-flex gap-3">
+      <button (click)="edit()" class="btn btn-primary">Edit</button>
+    </div>
+  </div>
+</main>
+<app-boat-edit [boat$]="getEditBoat$()"></app-boat-edit>

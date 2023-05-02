@@ -10,24 +10,19 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
-          <th scope="col">Description</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let boat of boats$ | async">
           <td>{{ boat.id }}</td>
-          <td>{{ boat.name }}</td>
-          <td>{{ boat.description }}</td>
+          <td>
+            <a [routerLink]="[routeConstants.boatDetails, boat.id]" class="">{{
+              boat.name
+            }}</a>
+          </td>
           <td>
             <span class="d-flex justify-content-end gap-1 flex-wrap">
-              <button
-                (click)="openEditBoatDialoge(boat.id)"
-                type="button"
-                class="btn btn-secondary py-0"
-              >
-                Edit
-              </button>
               <button
                 (click)="deleteBoat(boat.id)"
                 type="button"
@@ -96,61 +91,3 @@
     </small>
   </main>
 </div>
-
-<dialog #dialog (click)="handleClickDialog($event)" class="dialog">
-  <form
-    [formGroup]="editBoatForm"
-    (submit)="editBoat()"
-    class="form-group w-100 p-3"
-  >
-    <h2 class="text-center">Edit Boat</h2>
-    <div class="mb-3">
-      <label for="id" class="form-label">ID</label>
-      <input type="text" class="form-control" id="id" formControlName="id" />
-    </div>
-    <div class="mb-3">
-      <label for="name" class="form-label">Name *</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        formControlName="name"
-      />
-      <small *ngIf="editName.errors && editName.touched" class="text-danger"
-        >Field required</small
-      >
-    </div>
-
-    <div class="mb-3">
-      <label for="description" class="form-label">Description *</label>
-      <input
-        type="text"
-        class="form-control"
-        id="description"
-        formControlName="description"
-      />
-      <small
-        *ngIf="editDescription.errors && editDescription.touched"
-        class="text-danger"
-        >Field required</small
-      >
-    </div>
-    <div class="text-center">
-      <button
-        [disabled]="(loading$ | async) || editBoatForm.invalid"
-        type="submit"
-        class="btn btn-primary me-2"
-      >
-        Edit Boat
-      </button>
-      <button (click)="closeDialog()" type="button" class="btn btn-secondary">
-        Cancel
-      </button>
-      <small
-        *ngIf="error$ | async"
-        class="text-danger d-block w-100 text-center mt-2"
-        >An error occured. Try again later.</small
-      >
-    </div>
-  </form>
-</dialog>

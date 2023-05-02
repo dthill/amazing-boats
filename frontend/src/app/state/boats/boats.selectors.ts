@@ -4,17 +4,17 @@ import { BoatsState } from './boats.state';
 import { BoatsStateModel } from './boats.state-model';
 
 export class BoatsSelectors {
-  @Selector([BoatsState])
-  static boats(state: BoatsStateModel): BoatDto[] {
-    return state.boats;
-  }
+    @Selector([BoatsState])
+    static boats(state: BoatsStateModel): BoatDto[] {
+        return state.boats;
+    }
 
-  @Selector([BoatsState])
-  static loading(state: BoatsStateModel): boolean {
-    return state.loading;
-  }
-  @Selector([BoatsState])
-  static error(state: BoatsStateModel): boolean {
-    return state.error;
-  }
+    @Selector([BoatsState])
+    static loading(state: BoatsStateModel): boolean {
+        return state.loading;
+    }
+    @Selector([BoatsState])
+    static error(state: BoatsStateModel): boolean {
+        return state.error;
+    }
 }

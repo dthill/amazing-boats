@@ -8,30 +8,30 @@ import { LogoutAction } from 'src/app/state/user/user.actions';
 import { UserSelectors } from 'src/app/state/user/user.selectors';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'app-header',
+    standalone: true,
+    imports: [CommonModule, RouterModule],
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  readonly routeConstants = routeConstants;
+    readonly routeConstants = routeConstants;
 
-  @Select(UserSelectors.loggedIn)
-  loggedIn$!: Observable<boolean>;
+    @Select(UserSelectors.loggedIn)
+    loggedIn$!: Observable<boolean>;
 
-  constructor(private store: Store, private router: Router) {}
+    constructor(private store: Store, private router: Router) {}
 
-  login() {
-    this.router.navigate([routeConstants.login]);
-  }
-
-  logout() {
-    this.store
-      .dispatch(new LogoutAction())
-      .pipe(take(1))
-      .subscribe(() => {
+    login() {
         this.router.navigate([routeConstants.login]);
-      });
-  }
+    }
+
+    logout() {
+        this.store
+            .dispatch(new LogoutAction())
+            .pipe(take(1))
+            .subscribe(() => {
+                this.router.navigate([routeConstants.login]);
+            });
+    }
 }

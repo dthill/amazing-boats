@@ -1,5 +1,5 @@
 export interface UserStateModel {
-  token: string | null;
-  loading: boolean;
-  error: boolean;
+    token: string | null;
+    loading: boolean;
+    error: boolean;
 }
